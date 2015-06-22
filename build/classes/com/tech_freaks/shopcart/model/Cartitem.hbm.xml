@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 19, 2015 4:48:46 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.tech_freaks.shopcart.model.Cartitem" table="cartitem" catalog="tfcom_articles">
+        <id name="cartitemId" type="java.lang.Integer">
+            <column name="cartitem_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cart" class="com.tech_freaks.shopcart.model.Cart"  fetch="select">
+            <column name="cart_id" not-null="true"  />
+        </many-to-one>
+        <many-to-one name="product" class="com.tech_freaks.shopcart.model.Product" fetch="select">
+            <column name="product_id" not-null="true" />
+        </many-to-one>
+        <property name="quantity" type="int">
+            <column name="quantity" not-null="true" />
+        </property>
+        <property name="unitprice" type="big_decimal">
+            <column name="unitprice" precision="6" not-null="true" />
+        </property>
+        <property name="totalprice" type="big_decimal">
+            <column name="totalprice" precision="6" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

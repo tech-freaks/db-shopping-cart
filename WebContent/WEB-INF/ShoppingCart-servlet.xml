@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.1.xsd
+	http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd"
+	>
+<!-- Configure JDBC Connection-->
+      <bean id="dataSource"
+            class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+            <property name="url" value="jdbc:mysql://localhost:3306/tfcom_articles" />
+            <property name="username" value="admin" />
+            <property name="password" value="admin*" />
+      </bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<context:component-scan base-package="com.tech_freaks.shopcart.controller"/>
+	 
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/jsp/" />
+      <property name="suffix" value=".jsp" />
+   </bean>
+   
+   <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <property name="dataSource">
+                  <ref bean="dataSource" />
+            </property>
+    <property name="configLocation" value="classpath:hibernate.cfg.xml" />
+	</bean>
+	
+   <bean id="productDao"
+   	class="com.tech_freaks.shopcart.dao.ProductDAOImpl">
+   	
+   </bean>
+   <bean id="productService" class="com.tech_freaks.shopcart.service.ProductServiceImpl">
+   		<property name="productDao" ref="productDao"></property>
+   </bean>
+   
+   <bean id="cartDao"
+   	class="com.tech_freaks.shopcart.dao.CartDAOImpl"/>
+   	
+   	<bean id="cartItemDao"
+   	class="com.tech_freaks.shopcart.dao.CartItemDAOImpl"/>
+   	
+   	<bean id="cartService" class="com.tech_freaks.shopcart.service.CartServiceImpl">
+   		<property name="cartDao" ref="cartDao"></property>
+   		<property name="cartItemDao" ref="cartItemDao"></property>
+   </bean>
+   
+   <bean id="transactionManager"
+            class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    
+   
+</beans>
