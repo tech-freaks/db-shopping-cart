@@ -2,5 +2,7 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-  <table-filter match-schema="tfcom_articles" match-name=".*"/>
+  <table-filter match-catalog="tfcom_articles" match-name="cart"/>
+  <table-filter match-catalog="tfcom_articles" match-name="cartitem"/>
+  <table-filter match-catalog="tfcom_articles" match-name="product"/>
 </hibernate-reverse-engineering>
