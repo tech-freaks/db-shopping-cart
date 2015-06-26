@@ -9,6 +9,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
 </head><body>
+<div><center>${errorMessage}</center></div>
 <p><font face="Verdana, Arial, Helvetica, sans-serif" size="3"><strong>Product
 List </strong></font></p>
 
@@ -57,7 +58,16 @@ Quantity:<input size="2" value="1" name="quantity" type="text"> </td>
             </td>
           </tr>
           <tr>
-            <td style="vertical-align: top;"><br><input name="action" value="add" type="hidden"><input name="addToCart" value="Add To Cart" type="submit"> 
+            <td style="vertical-align: top;"><br>
+            <c:choose>
+            		<c:when test="${product.buyable.toString() eq 'Y' }">
+            			<input name="action" value="add" type="hidden"><input name="addToCart" value="Add To Cart" type="submit">
+            		</c:when>
+            		<c:when test="${product.buyable.toString() eq 'N'}">
+            			<div style="color: red">Sold Out</div>
+            		</c:when>
+            	</c:choose>
+            	 
             </td>
             <td style="vertical-align: top;"><br>
             </td>

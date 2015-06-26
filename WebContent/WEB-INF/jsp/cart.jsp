@@ -7,7 +7,7 @@
 </head>
 
 <body>
-
+<div><center>${errorMessage}</center></div>
 <p><font face="Verdana, Arial, Helvetica, sans-serif"><strong>Shopping Cart</strong></font></p>
 <p><a href="${pageContext.servletContext.contextPath}/products.html">Model List</a> </p>
 <table width="75%" border="1">
